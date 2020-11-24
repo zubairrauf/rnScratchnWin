@@ -1,65 +1,66 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-import {Button} from 'native-base'
+import {Button, Icon} from 'native-base'
 import {FontAwesome} from '@expo/vector-icons'
 
-const itemArray = new Array(5).fill({status: 'empty', icon : 'circle', color: 'black'})
+const numberOfItems = 10
+const itemsArray = new Array(numberOfItems).fill({status: 'empty', icon : 'circle', color: 'black'})
 
 export default function App() {
+  const [items, setItems] = useState(itemsArray)
   const [randomNumber, setRandomNumber] = useState('')
-  const [icon, setIcon] = useState('circle')
-  const [color, setColor] = useState('black')
-  const [isScratched, setIsScratched] = useState('false')
-
+  
   useEffect(() => {
-   generateRandomNumber()
+    drawNumber(numberOfItems)
   }, [])
 
-  const generateRandomNumber = () => {
-    setRandomNumber(Math.floor(Math.random() * 5 ))
+  const drawNumber = (numberOfItems) => {
+    setRandomNumber(Math.floor(Math.random() * numberOfItems ))
   }
 
   const scratchItem = itemNumber => {
-    if(randomNumber === itemNumber){
-      itemArray[itemNumber] = {status :'matched', icon:'dolar', color:'green'}
-      console.log('Matched')
+    //TODO: Need to fix the setItems on arrays
+    var updatedArray = []
+    if(itemNumber === randomNumber) {
+      updatedArray =  items.map((item, i) => {
+        if(i === itemNumber){
+          return {status:'matched', icon:'dollar', color:'green'}
+        } else {
+          return item
+        }
+      })
+      
     } else {
-      itemArray[itemNumber] = {status : 'unmatched', icon:'frown-o', color:'red'}
-      console.log('Unmatched')
+      updatedArray =  items.map((item, i) => {
+        if(i === itemNumber){
+          return {status:'unmatched', icon:'frown-o', color:'red'}
+        } else {
+          return item
+        }
+      })
     }
-  }
+    setItems(updatedArray)
+   }
 
-  // const scratchItemIcon = itemNumber => {
-  //   //TODO: Find right icon
-  //   if (itemArray[itemNumber] === 'matched') {
-  //     return 'dollar'
-  //   } else if (itemArray[itemNumber] === 'unmatched') {
-  //     return 'frown-o'
-  //   }
-  //   return 'circle'
-  // }
+   const resetGame = () => {
+    updatedArray =  items.map(item => {
+      return {status:'unmatched', icon:'circle', color:'black'}
+    })
+    drawNumber(numberOfItems)
+    setItems(updatedArray)
+   }
 
-  // const scratchItemColor = itemNumber => {
-  //   //TODO: Find right color
-  //   if (itemArray[itemNumber] === 'matched') {
-  //     return 'green'
-  //   } else if (itemArray[itemNumber] === 'unmatched') {
-  //     return 'red'
-  //   }
-  //   return 'black'
-  // }
-
-  const showAllItems = () => {
-    //TODO: reveal all icons
-    itemArray.fill('unmatched')
-    itemArray[randomNumber] = 'matched'
-  }
-
-  const resetGame = () => {
-    //TODO: reset the game, generate a new random number and empty the array
-    generateRandomNumber()
-  }
+   const showAll = () => {
+    updatedArray =  items.map((item, i) => {
+      if(i === randomNumber){
+        return {status:'matched', icon:'dollar', color:'green'}
+      } else {
+        return {status:'unmatched', icon:'frown-o', color:'red'}
+      }
+    })
+    setItems(updatedArray)
+   }
 
   return (
     <View style={styles.container}>
@@ -70,41 +71,87 @@ export default function App() {
         <View style={styles.itemRow}>
           <TouchableOpacity style={styles.item} onPress={() => scratchItem(0)}>
             <FontAwesome 
-              name={itemArray[0].icon}
+              name={items[0].icon}
               size={50}
-              color={color}
+              color={items[0].color}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.item} onPress={() => scratchItem(1)}>
             <FontAwesome 
-              name={itemArray[1].icon}
+              name={items[1].icon}
               size={50}
-              color={color}
+              color={items[1].color}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.item} onPress={() => scratchItem(2)}>
             <FontAwesome 
-              name={itemArray[2].icon}
+              name={items[2].icon}
               size={50}
-              color={color}
+              color={items[2].color}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.item} onPress={() => scratchItem(3)}>
             <FontAwesome 
-              name={itemArray[3].icon}
+              name={items[3].icon}
               size={50}
-              color={color}
+              color={items[3].color}
               />
           </TouchableOpacity>
           <TouchableOpacity style={styles.item} onPress={() => scratchItem(4)}>
             <FontAwesome 
-              name={itemArray[4].icon}
+              name={items[4].icon}
               size={50}
-              color={color}
+              color={items[4].color}
               />
           </TouchableOpacity>
         </View>
-        <Text>{randomNumber}</Text>
+        <View style={styles.itemRow}>
+          <TouchableOpacity style={styles.item} onPress={() => scratchItem(5)}>
+            <FontAwesome 
+              name={items[5].icon}
+              size={50}
+              color={items[5].color}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.item} onPress={() => scratchItem(6)}>
+            <FontAwesome 
+              name={items[6].icon}
+              size={50}
+              color={items[6].color}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.item} onPress={() => scratchItem(7)}>
+            <FontAwesome 
+              name={items[7].icon}
+              size={50}
+              color={items[7].color}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.item} onPress={() => scratchItem(8)}>
+            <FontAwesome 
+              name={items[8].icon}
+              size={50}
+              color={items[8].color}
+              />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.item} onPress={() => scratchItem(9)}>
+            <FontAwesome 
+              name={items[9].icon}
+              size={50}
+              color={items[9].color}
+              />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.buttons}>
+        <Button style={styles.btn} iconLeft full warning onPress={() => showAll()}>
+          <Icon name='warning'/>
+          <Text style={styles.btnText}>Scratch all</Text>
+        </Button>
+        <Button style={styles.btn} iconLeft full danger onPress={() => resetGame()}>
+          <Icon name='warning'/>
+          <Text style={styles.btnText}>Reset</Text>
+        </Button>
       </View>
     </View>
   );
@@ -117,4 +164,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  itemRow: {
+    flexDirection: 'row'
+  },
+  item: {
+    margin: 10
+  },
+  buttons: {
+    flexDirection: 'row'
+  },
+  btn: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    margin: 5,
+    width: '40%',
+    justifyContent: 'flex-start'
+  },
+  btnText: {
+    margin: 10,
+    color: 'black',
+    fontWeight: '600'
+  }
 });
