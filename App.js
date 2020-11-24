@@ -6,6 +6,7 @@ import {FontAwesome} from '@expo/vector-icons'
 
 const numberOfItems = 10
 const itemsArray = new Array(numberOfItems).fill({status: 'empty', icon : 'circle', color: 'black'})
+var updatedArray = []
 
 export default function App() {
   const [items, setItems] = useState(itemsArray)
@@ -21,7 +22,7 @@ export default function App() {
 
   const scratchItem = itemNumber => {
     //TODO: Need to fix the setItems on arrays
-    var updatedArray = []
+    
     if(itemNumber === randomNumber) {
       updatedArray =  items.map((item, i) => {
         if(i === itemNumber){
@@ -64,8 +65,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Scratch and win</Text>
+      <View style={styles.topBar}>
+        <Text style={styles.topText}>Scratch'n Win</Text>
       </View>
       <View style={styles.grid}>
         <View style={styles.itemRow}>
@@ -146,7 +147,7 @@ export default function App() {
       <View style={styles.buttons}>
         <Button style={styles.btn} iconLeft full warning onPress={() => showAll()}>
           <Icon name='warning'/>
-          <Text style={styles.btnText}>Scratch all</Text>
+          <Text style={styles.btnText}>Show all</Text>
         </Button>
         <Button style={styles.btn} iconLeft full danger onPress={() => resetGame()}>
           <Icon name='warning'/>
@@ -162,16 +163,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    height: '100%'
+  },
+  topBar: {
+    backgroundColor: '#8878e6',
+    width: '100%',
+    paddingTop: 40,
+    paddingBottom: 20
+  },
+  topText: {
+    textAlign: 'center',
+    fontSize: 22,
+    color: '#fff'
   },
   itemRow: {
     flexDirection: 'row'
   },
   item: {
-    margin: 10
+    margin: 10,
+    borderWidth: 1,
+    minWidth: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttons: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: '#8878e6',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
   },
   btn: {
     paddingVertical: 5,
