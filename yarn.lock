@@ -4693,6 +4693,11 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-confetti-cannon@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-confetti-cannon/-/react-native-confetti-cannon-1.5.1.tgz#c4f15b8ccb2823fb4785d6896743865be6df58a4"
+  integrity sha512-4yjnIqMsPFiiicVkICGVZqC+ZZiXmryQ4wxHSRbRtaYv4QuK/IWccXXA/wJq72kiefuh41cakG1HVEu8AgflQQ==
+
 react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"

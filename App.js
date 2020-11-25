@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import {Button, Icon} from 'native-base'
 import {FontAwesome} from '@expo/vector-icons'
+import ConfettiCannon from 'react-native-confetti-cannon';
+//TODO: Figure out the Confetti thing on success
 
 const numberOfItems = 10
 const itemsArray = new Array(numberOfItems).fill({status: 'empty', icon : 'circle', color: 'black'})
@@ -27,11 +29,11 @@ export default function App() {
       updatedArray =  items.map((item, i) => {
         if(i === itemNumber){
           return {status:'matched', icon:'dollar', color:'green'}
+          
         } else {
           return item
         }
       })
-      
     } else {
       updatedArray =  items.map((item, i) => {
         if(i === itemNumber){
@@ -67,7 +69,7 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.topBar}>
         <Text style={styles.topText}>Scratch'n Win</Text>
-      </View>
+      </View>      
       <View style={styles.grid}>
         <View style={styles.itemRow}>
           <TouchableOpacity style={styles.item} onPress={() => scratchItem(0)}>
